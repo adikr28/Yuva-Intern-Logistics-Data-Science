@@ -2,24 +2,32 @@
 
 This repository contains my work for the **YuvaIntern Data Science Internship**, focused on logistics analytics, delivery performance, predictive modeling, and optimization.
 
+## Project Continuity
+
+The internship work is being developed as one connected logistics analytics project. Each week's deliverable builds on the previous stage instead of treating the tasks as unrelated exercises.
+
 ## Week 1 – Strategic Planning and Data Exploration
 
-### Objective
-Develop a strategic analytical plan for an e-commerce logistics scenario involving delivery reliability, delivery time, freight cost, and operational resource allocation.
+Week 1 defines the e-commerce logistics scenario, business problem, KPIs, research foundation, analytical roadmap, and proposed use of regression, classification, clustering, and route optimization.
 
-### Proposed Business Scenario
-The project considers an e-commerce marketplace coordinating orders between geographically distributed sellers and customers. The goal is to understand the factors associated with late deliveries and develop a data-driven roadmap for improving logistics performance.
+## Week 2 – Data Collection, Cleaning, and Preprocessing
 
-### Key KPIs
-- On-Time Delivery Rate
-- Average Delivery Time
-- Average Delivery Delay
-- Late Delivery Rate
-- Freight Cost per Order
-- Customer Satisfaction / Review Score
+Week 2 converts the Week 1 strategy into a reproducible data-preparation workflow. It covers data profiling, missing-value handling, duplicate and key-integrity checks, timestamp validation, outlier investigation, categorical standardization, logistics feature engineering, scaling, and leakage prevention.
+
+### Week 2 Focus
+- Data collection simulation
+- Data quality assessment
+- Missing-value analysis
+- Duplicate and table-grain validation
+- Timestamp cleaning and chronology checks
+- IQR-based outlier detection
+- Categorical standardization
+- Delivery-time and delay feature engineering
+- Standardization for model-ready data
+- Final validation checklist
 
 ### Dataset
-The proposed analysis uses the **Brazilian E-Commerce Public Dataset by Olist**, a publicly available dataset containing order, seller, customer, product, payment, review, and geolocation information.
+The project uses the **Brazilian E-Commerce Public Dataset by Olist**, a public dataset containing order, seller, customer, product, payment, review, and geolocation information.
 
 Dataset source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
@@ -52,6 +60,9 @@ Yuva-Intern-Logistics-Data-Science/
 ├── README.md
 ├── Week_1/
 │   └── planning_notes.md
+├── Week_2/
+│   ├── README.md
+│   └── preprocessing_pipeline.py
 ├── notebooks/
 │   └── README.md
 ├── data/
@@ -63,4 +74,4 @@ Yuva-Intern-Logistics-Data-Science/
 
 ## Internship Deliverables
 
-Week 1 focuses on strategic planning, research, KPI definition, methodology selection, and Python code illustration. Later weeks will extend this foundation with implementation, analysis, modeling, and visualization as required by the internship tasks.
+Week 1 establishes the strategy and analytical design. Week 2 establishes the data-quality and preprocessing foundation. Future weeks will extend the same project with implementation, exploratory analysis, modeling, visualization, and logistics decision support as required by the internship tasks.
