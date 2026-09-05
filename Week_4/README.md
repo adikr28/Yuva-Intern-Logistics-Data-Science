@@ -20,49 +20,61 @@ This project builds and evaluates predictive models to forecast **delivery time 
 2. Decision Tree Regressor — non-linear benchmark
 3. Random Forest Regressor — ensemble model
 
-## Test-set results
+## Evaluation
 
-| Model | MAE | RMSE | R² |
-|---|---:|---:|---:|
-| Linear Regression | 0.8436 | 1.0705 | 0.7600 |
-| Random Forest | 0.8681 | 1.0975 | 0.7477 |
-| Decision Tree | 0.9111 | 1.1548 | 0.7206 |
+The models are evaluated using:
+- MAE
+- RMSE
+- R²
 
-**Best model: Linear Regression**
+The best model is additionally evaluated with 5-fold cross-validation.
 
-## 5-fold cross-validation
+### Test-set results
 
+            Model      MAE     RMSE       R2
+Linear Regression 0.843634 1.070486 0.759952
+    Random Forest 0.868149 1.097481 0.747692
+    Decision Tree 0.911089 1.154825 0.720637
+
+### Best model
+
+**Linear Regression**
+
+5-fold cross-validation:
 - MAE: **0.8440 ± 0.0164 days**
 - RMSE: **1.0700 ± 0.0201 days**
 - R²: **0.7575 ± 0.0136**
 
 ## Optimization Strategy
 
-The model is used as an early-warning layer. Shipments in the top 25% of predicted delivery times are flagged for proactive review. The 75th-percentile threshold in this run is **7.87 days**, flagging **25%** of the test set by construction.
+The model can be used as an early-warning layer. Shipments whose predicted delivery time falls in the top 25% of predictions are flagged as high risk. In the test set, this represents **25.00%** of shipments by construction.
 
-Recommended actions include route review, transport-mode review, capacity/carrier review, proactive customer communication, and re-scoring when new operational information becomes available. These are prioritization strategies and should be validated with real historical outcomes before deployment.
+Recommended actions for flagged shipments:
+1. Review route and distance before dispatch.
+2. Check whether a different transport mode can meet the service requirement.
+3. Prioritize high-risk shipments for capacity/carrier review.
+4. Use predicted delivery time to communicate realistic expectations.
+5. Re-score shipments as operational information changes.
 
-## Feature importance
+This is a prioritization strategy, not proof that changing a route will reduce delivery time. Any operational intervention should be tested against real historical outcomes.
 
-Permutation importance for the selected model ranked the main predictors as:
+## Key Findings
 
-1. `estimated_delivery_days`
-2. `distance_km`
-3. `transport_mode`
-4. `region`
-5. `fuel_cost`
-6. `shipment_volume_kg`
-
-Feature importance indicates predictive usefulness, not causation.
+- The model comparison identifies **Linear Regression** as the strongest test-set model by RMSE.
+- The strongest predictive features are shown in `charts/feature_importance.png`.
+- The actual-vs-predicted chart shows how closely the selected model tracks delivery time.
+- Residual analysis is included to identify systematic prediction errors.
+- Cross-validation is included to test whether performance is stable across different data splits.
 
 ## Files
 
-- `README.md` – project overview and results
+- `Week_4_Predictive_Modeling_Report.docx` – final internship report
 - `week4_logistics_prediction.py` – reproducible Python implementation
+- `week3_logistics_simulated_data.csv` – source simulated dataset
 - `week4_model_results.csv` – model metrics
+- `week4_predictions.csv` – held-out predictions
 - `week4_feature_importance.csv` – permutation importance
-- `Week_4_Predictive_Modeling_Report.docx` – complete internship report (upload this binary file manually if it is not yet in the repository)
-- `charts/` – generated visualizations (upload the PNG files manually if needed)
+- `charts/` – four visualization outputs
 
 ## Run
 

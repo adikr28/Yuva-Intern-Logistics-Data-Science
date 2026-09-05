@@ -27,6 +27,7 @@ features = [
     "shipment_volume_kg", "distance_km", "transport_mode",
     "region", "fuel_cost", "estimated_delivery_days"
 ]
+
 X = df[features]
 y = df[target]
 
@@ -45,8 +46,7 @@ models = {
     "Linear Regression": LinearRegression(),
     "Decision Tree": DecisionTreeRegressor(max_depth=8, min_samples_leaf=10, random_state=42),
     "Random Forest": RandomForestRegressor(
-        n_estimators=250, max_depth=12, min_samples_leaf=3,
-        random_state=42, n_jobs=-1
+        n_estimators=250, max_depth=12, min_samples_leaf=3, random_state=42, n_jobs=-1
     ),
 }
 
@@ -56,6 +56,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 results = []
 fitted = {}
+
 for name, model in models.items():
     pipe = Pipeline([("prep", preprocess), ("model", model)])
     pipe.fit(X_train, y_train)
@@ -97,6 +98,7 @@ importance = pd.DataFrame({
 print("\nFEATURE IMPORTANCE")
 print(importance.to_string(index=False))
 
+# A simple predictive-risk rule for operational prioritization.
 predictions = pd.DataFrame(index=X_test.index)
 predictions["actual_delivery_days"] = y_test
 predictions["predicted_delivery_days"] = best_pred
@@ -106,7 +108,8 @@ predictions["high_risk_flag"] = predictions["predicted_delivery_days"] >= thresh
 print(f"\nHigh-risk threshold (75th percentile): {threshold:.2f} days")
 print(f"High-risk shipments: {predictions['high_risk_flag'].mean()*100:.2f}%")
 
-plt.figure(figsize=(7, 6))
+# Reproduce core visualization.
+plt.figure(figsize=(7,6))
 plt.scatter(y_test, best_pred, s=10, alpha=0.35)
 mn, mx = min(y_test.min(), best_pred.min()), max(y_test.max(), best_pred.max())
 plt.plot([mn, mx], [mn, mx], linestyle="--")
